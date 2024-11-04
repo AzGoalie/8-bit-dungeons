@@ -5,10 +5,10 @@ import { FrameType, UnitFrame } from "./unit-frame";
 
 const app = new Application();
 await app.init({
-  background: 0x21f4b,
+  background: "#111",
   resizeTo: window,
   autoDensity: true,
-  resolution: 1,
+  resolution: devicePixelRatio,
 });
 document.body.appendChild(app.canvas);
 
