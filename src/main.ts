@@ -13,7 +13,7 @@ await app.init({
 document.body.appendChild(app.canvas);
 
 const frames = new Container();
-let y = 5;
+let y = 0;
 
 const types: FrameType[] = [
   "default",
@@ -38,10 +38,3 @@ types.forEach((t) => {
 frames.x = 10;
 frames.y = 10;
 app.stage.addChild(frames);
-
-app.stage.eventMode = "static";
-app.stage.onclick = () => {
-  const unitFrame = frames.getChildAt(0) as UnitFrame;
-  console.log("aaa");
-  unitFrame.setName("asldkfjklasdjf");
-};
