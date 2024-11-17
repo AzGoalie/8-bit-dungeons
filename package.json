@@ -6,9 +6,19 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^3.2.2",
+    "@pixi/storybook-renderer": "^1.0.0",
+    "@pixi/storybook-vite": "^1.0.0",
+    "@storybook/addon-essentials": "^8.4.4",
+    "@storybook/addon-interactions": "^8.4.4",
+    "@storybook/blocks": "^8.4.4",
+    "@storybook/test": "^8.4.4",
+    "storybook": "^8.4.4",
     "typescript": "~5.6.2",
     "vite": "^5.4.10"
   },
