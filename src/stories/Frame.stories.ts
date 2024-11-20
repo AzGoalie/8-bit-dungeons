@@ -1,5 +1,6 @@
-import { Meta, PixiStory, StoryObj, StoryFn } from "@pixi/storybook-renderer";
+import { Meta, StoryObj } from "@pixi/storybook-renderer";
 import Frame, { FrameProps } from "../ui/Frame";
+import { createComponentStoryFn } from "./utils";
 
 const meta: Meta<FrameProps> = {
   argTypes: {
@@ -10,31 +11,22 @@ const meta: Meta<FrameProps> = {
 
 export default meta;
 
-const FrameStory: StoryFn<FrameProps> = (options, context) =>
-  new PixiStory({
-    context,
-    init: (view) => {
-      const frame = new Frame(options);
-      view.addChild(frame);
-    },
-    resize: (view, width, height) => {
-      const frame = view.children[0];
-      frame.x = width / 2 - frame.width / 2;
-      frame.y = height / 2 - frame.height / 2;
-    },
-  });
-
 interface FrameStoryProps extends FrameProps {
   strokeColor: string;
   fillColor: string;
   strokeWidth: number;
 }
+
+const frameStoryFn = createComponentStoryFn(Frame);
+
 export const ExampleFrame: StoryObj<FrameStoryProps> = {
-  render: ({ strokeColor, strokeWidth, fillColor, ...options }, context) => {
-    options.fillStyle = { color: fillColor };
-    options.strokeStyle = { color: strokeColor, width: strokeWidth };
-    return FrameStory(options, context);
-  },
+  render: frameStoryFn(
+    ({ strokeColor, strokeWidth, fillColor, ...options }) => {
+      options.fillStyle = { color: fillColor };
+      options.strokeStyle = { color: strokeColor, width: strokeWidth };
+      return new Frame(options);
+    }
+  ),
   args: {
     width: 224,
     height: 64,
@@ -49,8 +41,8 @@ export const ExampleFrame: StoryObj<FrameStoryProps> = {
   },
 };
 
-export const TransparentFill: StoryObj<FrameProps> = {
-  render: FrameStory,
+export const TransparentFill: StoryObj<FrameStoryProps> = {
+  render: frameStoryFn(),
   args: {
     width: 224,
     height: 64,
@@ -65,7 +57,7 @@ export const TransparentFill: StoryObj<FrameProps> = {
 };
 
 export const TransparentStroke: StoryObj<FrameStoryProps> = {
-  render: FrameStory,
+  render: frameStoryFn(),
   args: {
     width: 224,
     height: 64,
