@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@pixi/storybook-renderer";
 import Frame, { FrameProps } from "../ui/Frame";
-import { createComponentStoryFn } from "./utils";
+import { ComponentStory } from "./utils";
 
 const meta: Meta<FrameProps> = {
   argTypes: {
@@ -17,10 +17,10 @@ interface FrameStoryProps extends FrameProps {
   strokeWidth: number;
 }
 
-const frameStoryFn = createComponentStoryFn(Frame);
+const FrameStory = ComponentStory(Frame);
 
 export const ExampleFrame: StoryObj<FrameStoryProps> = {
-  render: frameStoryFn(
+  render: ComponentStory(
     ({ strokeColor, strokeWidth, fillColor, ...options }) => {
       options.fillStyle = { color: fillColor };
       options.strokeStyle = { color: strokeColor, width: strokeWidth };
@@ -42,7 +42,7 @@ export const ExampleFrame: StoryObj<FrameStoryProps> = {
 };
 
 export const TransparentFill: StoryObj<FrameStoryProps> = {
-  render: frameStoryFn(),
+  render: FrameStory,
   args: {
     width: 224,
     height: 64,
@@ -57,7 +57,7 @@ export const TransparentFill: StoryObj<FrameStoryProps> = {
 };
 
 export const TransparentStroke: StoryObj<FrameStoryProps> = {
-  render: frameStoryFn(),
+  render: FrameStory,
   args: {
     width: 224,
     height: 64,

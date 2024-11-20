@@ -10,9 +10,9 @@ type InitFn<C extends Constructor<any>, P extends ConstructorParameters<C>> = (
   args: P
 ) => InstanceType<C>;
 
-function ComponentStory<
+export function ComponentStory<
   C extends Constructor<Container>,
-  P extends ConstructorParameters<C>
+  P extends ConstructorParameters<C>[0]
 >(target: C | InitFn<C, P>): StoryFn<P> {
   return (options, context) =>
     new PixiStory({
@@ -28,12 +28,4 @@ function ComponentStory<
         view.y = height / 2 - view.height / 2;
       },
     });
-}
-
-export function createComponentStoryFn<C extends Constructor<Container>>(
-  type: C
-) {
-  return <P extends ConstructorParameters<C>[0]>(
-    target: C | InitFn<C, P> = type
-  ) => ComponentStory(target);
 }
